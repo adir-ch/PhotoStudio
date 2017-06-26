@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,10 +7,11 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="input-group" id="photo-search-group">
-            <span class="input-group-addon glyphicon glyphicon-search"></span>
-            @Html.TextBox("photo-search", null, new { @class = "form-control", placeholder = "Search" })
+        <div class="col-md-12">
+            <div id="photo-search-group" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                @Html.TextBox("photo-search", null, new { @class = "form-control", placeholder = "Search" })
+            </div>
         </div>
-        
-    </div> 
+    </div>
 </div>
