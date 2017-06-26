@@ -30,5 +30,8 @@ textarea {
     background-color: #b59797;
     font-size: large; 
     color: white;
+}
+
+#photo-search-group {
     margin-bottom: 5%;
 }
