@@ -39,7 +39,7 @@ namespace PhotoStudio.Services
             {
                 db.Database.Log = Console.WriteLine; 
                 db.SubmitOrder(order);
-                Console.WriteLine("Request: Order {0} for client {1} received, printing {2} photos", order.OrderId, order.CustomerName, order.OrderItems.Count());
+                Console.WriteLine("Request: Order {0} for client {1} received, printing {2} photos", order.Id, order.CustomerName, order.OrderItems.Count());
             }
         }
 

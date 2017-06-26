@@ -4,6 +4,7 @@
  using System.ComponentModel.DataAnnotations.Schema;
  using System.Linq;
  using System.Collections.Generic;
+using PhotoStudio.Entities;
 
 namespace PhotoStudio.Data
 {
@@ -19,22 +20,22 @@ namespace PhotoStudio.Data
         {
         }
 
-        public DbSet<OrderData> _Orders { get; set; }
-        public DbSet<PhotoData> _Photos { get; set; }
+        public DbSet<PrintOrder> Orders { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
-        public List<Entities.Photo> GetAvailablePhotos()
+        public List<Photo> GetAvailablePhotos()
         {
-            List<Entities.Photo> result = new List<Entities.Photo>();
-            _Photos.ToList().ForEach(p => result.Add(new Entities.Photo(p.Name) { Id = p.Id }));
+            List<Photo> result = new List<Photo>();
+            Photos.ToList().ForEach(p => result.Add(new Photo(p.Name) { Id = p.Id }));
             return result; 
         }
 
         public int SubmitOrder(Entities.PrintOrder printOrder) 
         {
-            OrderData order = new OrderData();
+            PrintOrder order = new PrintOrder();
             foreach(var photo in printOrder.OrderItems)
             {
-                var dbPhotoEntity = new PhotoData() { Name = photo.Name, Id = photo.Id };
+                var dbPhotoEntity = new Photo() { Name = photo.Name, Id = photo.Id };
 
                 // This line is very important! 
                 // This line tells the DbContext that the photo entity already exist in the DB and that it should 
@@ -42,30 +43,12 @@ namespace PhotoStudio.Data
                 // Without this line, the SaveChanges will add thoes photos to the DB, with new ID's, since for
                 // the DB context they are new and does not exist in the DB. 
                 Entry(dbPhotoEntity).State = EntityState.Unchanged;
-                order.Photos.Add(dbPhotoEntity); 
+                order.OrderItems.Add(dbPhotoEntity); 
             }
             
             order.CustomerName = printOrder.CustomerName;
-            _Orders.Add(order); // use AddRange for more than one order
+            Orders.Add(order); // use AddRange for more than one order
             return SaveChanges(); 
         }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OrderData>()
-                .Property(e => e.CustomerName)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<OrderData>()
-                .HasMany(e => e.Photos)
-                .WithMany(e => e.Orders)
-                .Map(m => m.ToTable("OrderLines").MapLeftKey("OrderId").MapRightKey("PhotoId"));
-
-            modelBuilder.Entity<PhotoData>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-        }
-
-        public System.Data.Entity.DbSet<PhotoStudio.Entities.Photo> Photos { get; set; }
     }
 }

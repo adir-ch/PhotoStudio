@@ -10,11 +10,16 @@ namespace PhotoStudio.Entities
     [DataContract]
     public class PrintOrder
     {
+        public PrintOrder()
+        {
+            OrderItems = new List<Photo>(); 
+        }
+
         [DataMember]
-        public List<Photo> OrderItems { get; set; }
+        public virtual ICollection<Photo> OrderItems { get; set; }
         
         [DataMember]
-        public int OrderId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string CustomerName { get; set; }
