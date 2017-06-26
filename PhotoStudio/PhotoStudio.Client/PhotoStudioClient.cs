@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace PhotoStudio.Client
 {
-    class Program
+    public class PhotoStudioClient
     {
         private List<Photo> _selectedPhotos;
         private PhotoStudioServiceClient _proxy = new PhotoStudioServiceClient(); 
 
-        public Program()
+        public PhotoStudioClient()
         {
             _selectedPhotos = new List<Photo>(); 
         }
@@ -43,7 +43,7 @@ namespace PhotoStudio.Client
 
         static void Main(string[] args)
         {
-            Program p = new Program();
+            PhotoStudioClient p = new PhotoStudioClient();
             Console.WriteLine("Available photos:");
             p.ShowPhotos();
             //Console.WriteLine("Write customer name");

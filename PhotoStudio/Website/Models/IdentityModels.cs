@@ -21,7 +21,7 @@ namespace Website.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("PhotoStudioContext", throwIfV1Schema: false)
         {
         }
 

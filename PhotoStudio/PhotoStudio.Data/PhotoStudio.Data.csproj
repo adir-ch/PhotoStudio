@@ -50,8 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Order.cs" />
-    <Compile Include="Photo.cs" />
+    <Compile Include="OrderData.cs" />
+    <Compile Include="PhotoData.cs" />
     <Compile Include="PhotoStudioContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

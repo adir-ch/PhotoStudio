@@ -36,7 +36,7 @@ CREATE TABLE dbo.Orders
 CREATE TABLE dbo.Photos
 ( 
     Id INTEGER PRIMARY KEY IDENTITY(1,1), 
-    PhotoName VARCHAR(50)
+    Name VARCHAR(50)
 ); 
 
 CREATE TABLE dbo.OrderLines
@@ -55,19 +55,19 @@ GO
 
 USE PhotoStudio; 
 
-INSERT INTO Photos(PhotoName)
+INSERT INTO Photos(Name)
 VALUES('Photo1.jpg');
 
 
-INSERT INTO Photos(PhotoName)
+INSERT INTO Photos(Name)
 VALUES('Photo2.jpg');
 
 
-INSERT INTO Photos(PhotoName)
+INSERT INTO Photos(Name)
 VALUES('Photo3.jpg');
 
 
-INSERT INTO Photos(PhotoName)
+INSERT INTO Photos(Name)
 VALUES('Photo4.jpg');
 
 INSERT INTO Orders(CustomerName)

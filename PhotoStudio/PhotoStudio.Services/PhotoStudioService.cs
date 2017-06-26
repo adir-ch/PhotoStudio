@@ -14,7 +14,7 @@ namespace PhotoStudio.Services
     {
         public PhotoStudioService()
         {
-            // this line prevents from DB initialize data to appeare in the console log, needed in prod
+            // this line prevents from DB initialize data to appear in the console log, needed in prod
             Database.SetInitializer(new NullDatabaseInitializer<PhotoStudioContext>()); 
         }
 

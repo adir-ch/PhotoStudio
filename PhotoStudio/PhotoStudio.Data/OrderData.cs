@@ -6,20 +6,20 @@ namespace PhotoStudio.Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Photo
+    public partial class OrderData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Photo()
+        public OrderData()
         {
-            Orders = new HashSet<Order>();
+            Photos = new HashSet<PhotoData>();
         }
 
         public int Id { get; set; }
 
         [StringLength(50)]
-        public string PhotoName { get; set; }
+        public string CustomerName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<PhotoData> Photos { get; set; }
     }
 }

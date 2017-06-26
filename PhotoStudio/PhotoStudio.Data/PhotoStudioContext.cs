@@ -19,22 +19,22 @@ namespace PhotoStudio.Data
         {
         }
 
-        public DbSet<Order> _Orders { get; set; }
-        public DbSet<Photo> _Photos { get; set; }
+        public DbSet<OrderData> _Orders { get; set; }
+        public DbSet<PhotoData> _Photos { get; set; }
 
         public List<Entities.Photo> GetAvailablePhotos()
         {
             List<Entities.Photo> result = new List<Entities.Photo>();
-            _Photos.ToList().ForEach(p => result.Add(new Entities.Photo(p.PhotoName) { Id = p.Id }));
+            _Photos.ToList().ForEach(p => result.Add(new Entities.Photo(p.Name) { Id = p.Id }));
             return result; 
         }
 
         public int SubmitOrder(Entities.PrintOrder printOrder) 
         {
-            Order order = new Order();
+            OrderData order = new OrderData();
             foreach(var photo in printOrder.OrderItems)
             {
-                var dbPhotoEntity = new Photo() { PhotoName = photo.Name, Id = photo.Id };
+                var dbPhotoEntity = new PhotoData() { Name = photo.Name, Id = photo.Id };
 
                 // This line is very important! 
                 // This line tells the DbContext that the photo entity already exist in the DB and that it should 
@@ -52,18 +52,20 @@ namespace PhotoStudio.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderData>()
                 .Property(e => e.CustomerName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<OrderData>()
                 .HasMany(e => e.Photos)
                 .WithMany(e => e.Orders)
                 .Map(m => m.ToTable("OrderLines").MapLeftKey("OrderId").MapRightKey("PhotoId"));
 
-            modelBuilder.Entity<Photo>()
-                .Property(e => e.PhotoName)
+            modelBuilder.Entity<PhotoData>()
+                .Property(e => e.Name)
                 .IsUnicode(false);
         }
+
+        public System.Data.Entity.DbSet<PhotoStudio.Entities.Photo> Photos { get; set; }
     }
 }
