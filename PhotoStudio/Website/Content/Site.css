@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#photo-search {
+    min-width: 100%;
+    height: 50px;
+    opacity: 0.6; 
+    background-color: #b59797;
+    font-size: large; 
+    color: white;
+    margin-bottom: 5%;
+}
