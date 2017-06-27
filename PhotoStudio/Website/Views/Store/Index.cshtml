@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Website.ViewModels.StoreIndexViewModel
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,8 +12,40 @@
         <div class="col-md-12">
             <div id="photo-search-group" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                @Html.TextBox("photo-search", null, new { @class = "form-control", placeholder = "Search" })
+                @Html.TextBox("photo-search", null, new
+                                                    {
+                                                        @class = "form-control",
+                                                        placeholder = "Search",
+                                                        onKeyUp = "searchQueryChanged();"
+                                                    })
             </div>
         </div>
     </div>
 </div>
+
+<div id="search-results">
+    @{ Html.RenderPartial("_SearchResults", Model.Photos); }
+</div>
+
+
+
+<script type="text/javascript">
+    function searchQueryChanged() {
+        console.log("query: ", $("#photo-search").val());
+
+        $.ajax({
+            url: '@Url.Action("/Search")',
+            data: { SearchQuery: $("#photo-search").val() },
+            cache: false,
+            type: "GET",
+            dataType: "html",
+            success: function (data, textStatus, XMLHttpRequest) {
+                SetData(data);
+            }
+        });
+
+        function SetData(data) {
+            $("#search-results").html(data); // HTML DOM replace
+        }
+    }
+</script>

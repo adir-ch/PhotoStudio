@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Website.Models.Photo>
+
+@{
+    foreach (var photo in Model)
+    {
+        <p>@Html.ActionLink(photo.Name, "Details", "Photos", new { photo.Id }, null)</p>
+    }
+}
+
+

@@ -26,8 +26,17 @@ namespace PhotoStudio.Data
         public List<Photo> GetAvailablePhotos()
         {
             List<Photo> result = new List<Photo>();
-            Photos.ToList().ForEach(p => result.Add(new Photo(p.Name) { Id = p.Id }));
-            return result; 
+            return Photos.ToList(); // .ForEach(p => result.Add(new Photo(p.Name) { Id = p.Id }));
+            //return result; 
+        }
+
+        public List<Photo> GetAvailablePhotosByName(string photoName)
+        {
+            if (String.IsNullOrEmpty(photoName) == true || String.IsNullOrWhiteSpace(photoName) == true)
+            {
+                return GetAvailablePhotos(); 
+            }
+            return Photos.Where(p => p.Name.Contains(photoName)).ToList(); 
         }
 
         public int SubmitOrder(Entities.PrintOrder printOrder) 
