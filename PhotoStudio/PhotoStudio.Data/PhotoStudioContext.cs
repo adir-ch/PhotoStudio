@@ -5,6 +5,7 @@
  using System.Linq;
  using System.Collections.Generic;
 using PhotoStudio.Entities;
+using System.Threading.Tasks;
 
 namespace PhotoStudio.Data
 {
@@ -27,6 +28,12 @@ namespace PhotoStudio.Data
         {
             List<Photo> result = new List<Photo>();
             return Photos.ToList(); // .ForEach(p => result.Add(new Photo(p.Name) { Id = p.Id }));
+        }
+
+        public async Task<List<Photo>> GetAvailablePhotosAsync()
+        {
+            List<Photo> result = new List<Photo>();
+            return await Photos.ToListAsync(); // .ForEach(p => result.Add(new Photo(p.Name) { Id = p.Id }));
             //return result; 
         }
 
@@ -37,6 +44,15 @@ namespace PhotoStudio.Data
                 return GetAvailablePhotos(); 
             }
             return Photos.Where(p => p.Name.Contains(photoName)).ToList(); 
+        }
+
+        public async Task<List<Photo>> GetAvailablePhotosByNameAsync(string photoName)
+        {
+            if (String.IsNullOrEmpty(photoName) == true || String.IsNullOrWhiteSpace(photoName) == true)
+            {
+                return await GetAvailablePhotosAsync();
+            }
+            return await Photos.Where(p => p.Name.Contains(photoName)).ToListAsync();
         }
 
         public int SubmitOrder(Entities.PrintOrder printOrder) 
