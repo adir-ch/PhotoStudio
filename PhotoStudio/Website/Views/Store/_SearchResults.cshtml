@@ -3,7 +3,12 @@
 @{
     foreach (var photo in Model)
     {
-        <p>@Html.ActionLink(photo.Name, "Details", "Photos", new { photo.Id }, null)</p>
+        <p><a href='@Url.Action("Details", "Photos", new { photo.Id })'>
+            <img src='@Url.Content("~/Content/Photos/thumbs/" + photo.Name)' />
+        </a></p>
+    
+        @*<img src="Content/Photos/Thumbs/@photo.Name" />
+        <p>@Html.ActionLink(photo.Name, "Details", "Photos", new { photo.Id }, null)</p>*@
     }
 }
 

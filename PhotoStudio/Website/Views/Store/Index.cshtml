@@ -31,11 +31,12 @@
 
 <script type="text/javascript">
     function searchQueryChanged() {
+        var query = $("#photo-search").val().trim();
         console.log("query: ", $("#photo-search").val());
 
         $.ajax({
             url: '@Url.Action("/Search")',
-            data: { SearchQuery: $("#photo-search").val() },
+            data: { SearchQuery: query },
             cache: false,
             type: "GET",
             dataType: "html",
