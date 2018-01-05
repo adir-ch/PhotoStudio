@@ -3,9 +3,9 @@
 @{
     foreach (var photo in Model)
     {
-        <p><a href='@Url.Action("Details", "Photos", new { photo.Id })'>
-            <img src='@Url.Content("~/Content/Photos/thumbs/" + photo.Name)' />
-        </a></p>
+        <a href='@Url.Action("Details", "Photos", new { photo.Id })'>
+            <img src='@Url.Content("~/Content/Photos/thumbs/" + photo.Name)' class="responsive-image"/>
+        </a>
     
         @*<img src="Content/Photos/Thumbs/@photo.Name" />
         <p>@Html.ActionLink(photo.Name, "Details", "Photos", new { photo.Id }, null)</p>*@

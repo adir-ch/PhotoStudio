@@ -1,0 +1,5 @@
+﻿@model PhotoStudio.Entities.Photo
+
+<a href="~/Content/Photos/@Model.Name">
+    <img src='@Url.Content("~/Content/Photos/thumbs/" + Model.Name)' class="responsive-image" />
+</a>

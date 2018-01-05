@@ -38,3 +38,31 @@ textarea {
     margin-top: 2%;
     border: none 1px;
 }
+
+#photos-display {
+    position: relative; 
+}
+
+img.responsive-image:hover {
+    -webkit-filter: grayscale(0%);
+    -webkit-transition: .5s ease-in-out;
+    -moz-filter: grayscale(0%);
+    -moz-transition: .5s ease-in-out;
+    -o-filter: grayscale(0%);
+    -o-transition: .5s ease-in-out;
+    filter: grayscale(0%);
+}
+
+img.responsive-image {
+    max-height: 200px; 
+    max-width: 200px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    -webkit-filter: grayscale(100%);
+    -webkit-transition: .5s ease-in-out;
+    -moz-filter: grayscale(100%); 
+    -moz-transition: .5s ease-in-out;
+    -o-filter: grayscale(100%); 
+    -o-transition: .5s ease-in-out;
+    filter: grayscale(100%);
+}

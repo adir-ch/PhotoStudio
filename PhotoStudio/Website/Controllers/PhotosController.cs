@@ -11,17 +11,20 @@ using PhotoStudio.Entities;
 
 namespace Website.Controllers
 {
+    [Authorize(Roles="admin")]
     public class PhotosController : Controller
     {
         private PhotoStudioContext db = new PhotoStudioContext();
 
         // GET: Photos
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.GetAvailablePhotos());
         }
 
         // GET: Photos/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
